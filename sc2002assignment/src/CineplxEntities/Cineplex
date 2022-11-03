@@ -1,0 +1,41 @@
+package CineplexEntites
+
+//Cineplex Class
+import java.util.List;
+import java.util.ArrayList;
+
+public class Cineplex{
+    //attributes
+    private int cineplexID;
+    private String cineplexName;
+    public List<Cinema> cinemaList;
+    
+    //getters
+    public int get_cineplexID(){
+        return cineplexID;
+    }
+    public String get_cinelexName(){
+        return cineplexName;
+    }
+    
+    //setters
+    public void set_cineplexID(int ID){
+        cineplexID = ID;
+    }
+    public void set_cineplexName(String name){
+        cineplexName = name;
+    }
+    
+    //constructors
+    Cineplex(int ID, String name){
+        cineplexID = ID;
+        cineplexName = name;
+        cinemaList = new ArrayList<>();
+    }
+
+    //operations
+    public void addCinema(int num1, CinemaType ct, int num2, int num3, CinemaStatus cs, int numForLayout){
+        Cinema cinemaObject = new Cinema(num1, ct, num2, num3, cs, numForLayout);
+        cinemaList.add(cinemaObject);
+    }
+}
