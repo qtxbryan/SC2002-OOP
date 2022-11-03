@@ -45,6 +45,7 @@ public class Cinema{
         occupiedSeatNo = number;
     }
     public void set_cinemaStatus(CinemaStatus cs){
+        //tests
         cinemaStatus = cs;
     }
 
