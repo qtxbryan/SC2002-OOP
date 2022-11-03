@@ -23,7 +23,7 @@ public class CustomerApp {
 
 			System.out.println("Enter choice: ");
 			
-		}while (!sc.hasNextInt()) {
+		}while (!sc.hasNextInt() {
 			
 			System.out.println("Invalid input type. Please enter an integer value.");
     		sc.next(); // Remove newline character
