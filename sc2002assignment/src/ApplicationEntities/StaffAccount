@@ -1,0 +1,48 @@
+package ApplicationEntities;
+
+//StaffAccount Class
+
+public class StaffAccount {
+	private int staffID;
+	private string staffName;
+	private string password;
+	public int getStaffID() {
+		return staffID;
+	}
+	public void setStaffID(int staffID) {
+		this.staffID = staffID;
+	}
+	public string getStaffName() {
+		return staffName;
+	}
+	public void setStaffName(string staffName) {
+		this.staffName = staffName;
+	}
+	public string getPassword() {
+		return password;
+	}
+	public void setPassword(string password) {
+		this.password = password;
+	}
+	
+	
+	/**
+	 * @param staffID
+	 * @param staffName
+	 * @param password
+	 */
+	public StaffAccount(int staffID, string staffName, string password) {
+		super();
+		this.staffID = staffID;
+		this.staffName = staffName;
+		this.password = password;
+	}
+	//operations
+	public boolean verify(){
+		Scanner input = new Scanner(System.in);
+		string pass;
+		System.out.println("Enter your password:");
+		pass = input.next();
+		return password.equals(pass);
+	}
+}
