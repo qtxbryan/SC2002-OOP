@@ -1,8 +1,12 @@
 package movie;
 
+import java.time.LocalDate;
+import java.util.List;
+
+import booking.Ticket;
+
 public class Movie {
 
-	
 	private int bookingID; 
 	private List<Ticket> tickets; 
 	private int transactionID; 
@@ -55,7 +59,6 @@ public class Movie {
 	public void setCineplexID(int cineplexID) {
 		this.cineplexID = cineplexID;
 	}
-	
 	
 	
 	
