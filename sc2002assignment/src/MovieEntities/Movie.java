@@ -1,15 +1,17 @@
-package movie;
+package MovieEntities;
 
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.ArrayList;
 //Movie class
 import java.util.List;
-import java.util.ArrayList;
+
+import review.Review;
 
 enum MovieRating {G, PG, PG13, NC16, M18, R21;}
-enum Genre {Action, Animation, Blockbuster, Comedy, Crime, Drama, Fanatasy, Historical, Horror, Romance, SciFi, Thriller;}
 enum ShowingStatus {Coming_Soon, Preview, Now_Showing, End_Of_Showing;}
-enum MovieFormat {TwoD, ThreeD, Imax;}
 
-public class Movie{
+public class Movie implements Serializable{
     //attributes
     private int movieID;
     private String title;
@@ -25,95 +27,140 @@ public class Movie{
     private double totalReviewScore;
     private double averageReviewScore;
     private ShowingStatus status;
-    private DateTime releaseDate;
+    private LocalDate releaseDate;
     private int ticketsSold;
     private double profit;
     public List<ShowTime> showtimes;
     
-    //getters
-    public int get_movieID(){
+    
+    public Movie() {
+        
+        this.genres = new ArrayList<Genre>();
+        this.casts = new ArrayList<String>();
+        this.movieFormat = new ArrayList<MovieFormat>();
+        this.reviews = new ArrayList<Review>();
+        this.averageReviewScore = 0;
+        this.totalReviewNo = 0; 
+        this.totalReviewScore = 0;
+        
+        
+    }
+    
+    //Getters
+    public int getMovieID() {
         return movieID;
     }
-    public String get_title(){
+    public String getTitle() {
         return title;
     }
-    public String get_director(){
+    public List<Genre> getGenres() {
+        return genres;
+    }
+    public String getDirector() {
         return director;
     }
-    public String get_synopsis(){
+    public List<String> getCasts() {
+        return casts;
+    }
+    public String getSynopsis() {
         return synopsis;
     }
-    public MovieRating get_movieRating(){
+    public MovieRating getMovieRating() {
         return movieRating;
     }
-    public int get_duration(){
+    public List<MovieFormat> getMovieFormat() {
+        return movieFormat;
+    }
+    public int getDuration() {
         return duration;
     }
-    public int get_totalReviewNo(){
+    public List<Review> getReviews() {
+        return reviews;
+    }
+    public int getTotalReviewNo() {
         return totalReviewNo;
     }
-    public double get_totalReviewScore(){
+    public double getTotalReviewScore() {
         return totalReviewScore;
     }
-    public double get_averageReviewScore(){
+    public double getAverageReviewScore() {
         return averageReviewScore;
     }
-    public ShowingStatus get_status(){
+    public ShowingStatus getStatus() {
         return status;
     }
-    public DateTime get_releaseDate(){
+    public LocalDate getReleaseDate() {
         return releaseDate;
     }
-    public int get_ticketsSold(){
+    public int getTicketsSold() {
         return ticketsSold;
     }
-    public double get_profit(){
+    public double getProfit() {
         return profit;
     }
-    
-    //setters
-    public void set_movieID(int ID){
-        movieID = ID;
+    public List<ShowTime> getShowtimes() {
+        return showtimes;
     }
-    public void set_title(String title){
+    
+    
+    //Setters 
+    public void setMovieID(int movieID) {
+        this.movieID = movieID;
+    }
+    public void setTitle(String title) {
         this.title = title;
     }
-    public void set_director(String director){
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
+    }
+    public void setDirector(String director) {
         this.director = director;
     }
-    public void set_synopsis(String synopsis){
+    public void setCasts(List<String> casts) {
+        this.casts = casts;
+    }
+    public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
     }
-    public void set_movieRating(MovieRating movieRating){
+    public void setMovieRating(MovieRating movieRating) {
         this.movieRating = movieRating;
     }
-    public void set_duration(int duration){
+    public void setMovieFormat(List<MovieFormat> movieFormat) {
+        this.movieFormat = movieFormat;
+    }
+    public void setDuration(int duration) {
         this.duration = duration;
     }
-    public void set_totalReviewNo(int totalReviewNo){
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+    public void setTotalReviewNo(int totalReviewNo) {
         this.totalReviewNo = totalReviewNo;
     }
-    public void set_totalReviewScore(double totalReviewScore){
+    public void setTotalReviewScore(double totalReviewScore) {
         this.totalReviewScore = totalReviewScore;
     }
-    public void set_averageReviewScore(double averageReviewScore){
+    public void setAverageReviewScore(double averageReviewScore) {
         this.averageReviewScore = averageReviewScore;
     }
-    public void set_status(ShowingStatus status){
+    public void setStatus(ShowingStatus status) {
         this.status = status;
     }
-    public void set_releaseDate(DateTime releaseDate){
+    public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
     }
-    public void set_ticketsSold(int ticketsSold){
+    public void setTicketsSold(int ticketsSold) {
         this.ticketsSold = ticketsSold;
     }
-    public void set_profit(double profit){
+    public void setProfit(double profit) {
         this.profit = profit;
     }
-    //constuctors
+    public void setShowtimes(List<ShowTime> showtimes) {
+        this.showtimes = showtimes;
+    }
+   
     
-    //operations
+    
     public void displayMovieDetails(){
         System.out.println("Movie Title: "+title);
         System.out.println("Genres: "+genres);
