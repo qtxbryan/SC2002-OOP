@@ -1,12 +1,13 @@
 package review;
 
 import java.time.LocalDateTime;
+import java.io.Serializable;
 
-public class Review {
+public class Review implements Serializable {
 
-	//attributes
+	// attributes
 
-	private int reviewID; // ID of review
+	private String reviewID; // ID of review
 	private String reviewerName; 
 	private String reviewTitle; 
 	private String reviewBody; 
@@ -14,8 +15,9 @@ public class Review {
 	private double score; 
 	private LocalDateTime dateTime; //date and time of review  
 	
-    //Getters
-    public int get_reviewID() {
+    // getters
+
+    public String get_reviewID() {
         return reviewID;
     }
 
@@ -43,8 +45,9 @@ public class Review {
         return dateTime;
     }
     
-    //Setters
-    public void set_reviewID(int reviewID) {
+    // setters
+    
+    public void set_reviewID(String reviewID) {
         this.reviewID = reviewID;
     }
 
