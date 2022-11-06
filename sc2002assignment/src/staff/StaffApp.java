@@ -1,8 +1,9 @@
 package staff;
 
-public class staffApp{
+public class StaffApp // implements MainDriver(?) 
+{
 
-    private systemSettings;
+    private SystemSettings;
 
     private reviewManager;
 

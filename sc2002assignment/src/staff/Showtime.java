@@ -1,12 +1,12 @@
 package staff;
 
-ENUM{
+enum MovieFormat{
     TwoD,
     ThreeD,
     Imax,
 };
 
-public class showTime {
+public class Showtime {
     
     private int showTimeID;
 

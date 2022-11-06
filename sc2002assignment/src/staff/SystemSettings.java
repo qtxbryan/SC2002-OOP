@@ -1,4 +1,4 @@
-public class systemSettings {
+public class SystemSettings {
     
     private double standardTicketPrice;
 
