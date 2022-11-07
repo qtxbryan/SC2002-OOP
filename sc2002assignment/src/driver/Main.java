@@ -2,6 +2,7 @@ package driver;
 
 import java.util.Scanner;
 
+import MovieEntities.MovieManager;
 import customer.CustomerApp;
 
 public class Main {
@@ -38,7 +39,8 @@ public class Main {
 			        break; 
 			         
 			    case 2: 
-			        //Put Staff App 
+			        //Put Staff App TESTING
+			        MovieManager.getInstance().movieMenuStaff();
 			        break; 
 			    case 0:
 			        System.out.println("Thank you for using our application");

@@ -21,8 +21,9 @@ public class IDHelper {
 			
 			if (filePath == null) {
 				throw new IOException("Cannot find root of project.");
+				
 			} else {
-				filePath = filePath + "/data/ids/" + fileName + "_id.txt";
+				filePath = filePath + "/data/id/" + fileName + "ID.txt";
 			}
 									
 			FileReader frs = new FileReader( filePath );
