@@ -3,7 +3,7 @@ package booking;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import movie.Movie;
+import MovieEntities.Movie;
 
 /**
  * Booking made by Customer
@@ -29,7 +29,7 @@ public class Booking {
 		System.out.println("------------");
 		System.out.printf("Booking ID: %d\n", getBookingID());
 		//print movie name
-		//System.out.printf("Movie: %s\n", MovieManager.getInstance().getMoviebyID(getMovieID()).getTitle());
+		System.out.printf("Movie: %s\n", MovieEntities.Movie.getTitle());
 		System.out.printf("Cineplex: %d\n", getCineplexID());
 		System.out.printf("Hall: %d\n", getHallNo());
 
@@ -40,7 +40,7 @@ public class Booking {
 		//print tickets
 		System.out.printf("Seats booked: ");
 		for (int i = 0; i < getTickets().size(); i++){
-			System.out.printf("%Ticket", getTickets().get(i).getSeat());
+			System.out.printf("%s", getTickets().get(i).getSeat());
 			if (i+1 < getTickets().size()){
 				System.out.printf(",");
 			}
