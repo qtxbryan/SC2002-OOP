@@ -2,13 +2,11 @@ package driver;
 
 import java.util.Scanner;
 
-import customer.CustomerApp;
-
 public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
+		//TEST TESTING INGGN 
 		int choice;
 		Scanner sc = new Scanner(System.in);
 		
@@ -30,25 +28,6 @@ public class Main {
 			}
 			
 			choice = sc.nextInt();
-			
-			switch(choice) {
-			    
-			    case 1: 
-			        CustomerApp.getInstance().displayCustomerMenu();
-			        break; 
-			         
-			    case 2: 
-			        //Put Staff App 
-			        break; 
-			    case 0:
-			        System.out.println("Thank you for using our application");
-			        break; 
-			        
-			    default:
-			        System.out.println("Please enter a choice between 0 - 2");
-			        break; 
-			        
-			}
 			
 			
 		}while (choice != 0);
