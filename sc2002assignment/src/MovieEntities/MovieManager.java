@@ -722,7 +722,16 @@ public class MovieManager {
         
         
     }
-    
+
+    // saves a movie object and serializes it
+    // movie: The movie object to be saved
+     
+    private void save(Movie movie) 
+    {
+        String filepath = RootFinder.findRootPath() + "/data/movies/movie_"+movie.getMovieID()+".dat";
+        Serializer.serializeObject(movie, filepath);
+        System.out.println("Movies Saved!");
+    }
     
     /**
      * Remove movie by changing status to END_OF_SHOWING
@@ -789,6 +798,31 @@ public class MovieManager {
         
     }
    
-    
-    
+     // adds review to list of reviews that a movie has and updates the movie's total number of reviews
+     // total review score and average review score
+     // reviewScore: Score of the review to be added
+     // function: Specifies whether to add or remove a review from the review list
+     
+    public void updateReview(int movieID, String reviewID, double reviewScore, String function)
+    {
+        if (function.equals("add")) 
+        {
+        	Movie movie = movies.get(movieID);
+            movie.setTotalReviewNo(movie.getTotalReviewNo()+1);
+            movie.setTotalReviewScore(movie.getTotalReviewScore()+reviewScore);
+            movie.addMovieReview(reviewID);
+            movie.setAverageReviewScore(movie.getTotalReviewScore()/movie.getTotalReviewNo());
+            this.save(movie);
+        } 
+        
+        else if (function.equals("remove")) 
+        {
+        	Movie movie = movies.get(movieID);
+            movie.setTotalReviewNo(movie.getTotalReviewNo()-1);
+            movie.setTotalReviewScore(movie.getTotalReviewScore()-reviewScore);
+            movie.removeMovieReview(reviewID);
+            movie.setAverageReviewScore(movie.getTotalReviewScore()/movie.getTotalReviewNo());
+            this.save(movie);
+        }
+    }
 }
