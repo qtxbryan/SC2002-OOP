@@ -131,7 +131,7 @@ public class ReviewManager {
         
             switch (choice) {
             case 1:
-            	String reviewID = IDHelper.getLatestID("review");
+            	String reviewID = IDGenerator.getLatestID("review");
             	review.set_reviewID(reviewID);
             	this.save(review);
             	MovieManager.getInstance().updateReview(movieID, reviewID, review.get_score(), "add");
