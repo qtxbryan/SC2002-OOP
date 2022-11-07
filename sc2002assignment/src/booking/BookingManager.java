@@ -62,25 +62,59 @@ public class BookingManager {
                     System.out.println("Invalid choice entered. Please try again.");
             }   
         }
-        
-
-
     }
 
 
-
-    //called when booking is confirmed
+    //called when booking is confirmed, create record in data
     public int makeBooking(){
         
         for (int i = 0; i < getSelectedSeats().size(); i++){
 
         }
     }
+
     private listBookings(int customerID){
 
     }
 
-    private void displaySeats(){
+    private void displaySeats(List<String> list){
+        char item;
+        String rowRef;
+        String[] symbols = {"0", "1", "S"}; //Symbols for seat status display
 
+        //Iterate through List of Strings
+        for (int row = 0; row < list.size(); row++){
+            rowRef = list.get(row);
+
+            //check if row is NULL
+            if (rowRef == null || rowRef.lenght() == 0){
+                System.out.println();
+                continue;
+            }
+
+            //Check if this row has seats. If not, print whole row
+            if () {
+                System.out.println(rowRef);
+            }
+
+            else { // Seats present
+    			for (int col = 0; col < rowRef.length(); col++) {
+        			item = rowRef.charAt(col);
+
+        			// Check if current item is a seat. Prints corresponding symbol according to seat status.
+        			if (Character.isDigit(item)) {
+        				System.out.printf("%s", symbols[Character.getNumericValue(item)]);
+        			}
+        			// Else just print the character
+        			else {
+        				System.out.printf(Character.toString(item));
+        			}
+        		}
+    			System.out.println(); // Newline
+    		}
+        }
     }
+
+
+
 }
