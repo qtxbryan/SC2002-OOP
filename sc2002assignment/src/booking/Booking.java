@@ -13,8 +13,13 @@ public class Booking {
 	private int hallNo; 
 	private int cineplexID; 
 	
-	private void displayBooking() {
+	public void displayBooking() {
 		
-		
+	    
 	}
+
+	
+	
+	
+	
 }

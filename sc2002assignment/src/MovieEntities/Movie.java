@@ -3,18 +3,16 @@ package MovieEntities;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
-// movie class
-
+//Movie class
 import java.util.List;
+
+import review.Review;
 
 enum MovieRating {G, PG, PG13, NC16, M18, R21;}
 enum ShowingStatus {Coming_Soon, Preview, Now_Showing, End_Of_Showing;}
 
 public class Movie implements Serializable{
-   
     //attributes
-
     private int movieID;
     private String title;
     public List<Genre> genres;
@@ -24,7 +22,7 @@ public class Movie implements Serializable{
     private MovieRating movieRating;
     public List<MovieFormat> movieFormat;
     private int duration;
-    public List<String> reviews;
+    public List<Review> reviews;
     private int totalReviewNo;
     private double totalReviewScore;
     private double averageReviewScore;
@@ -32,7 +30,7 @@ public class Movie implements Serializable{
     private LocalDate releaseDate;
     private int ticketsSold;
     private double profit;
-    public List<String> showtimes;
+    public List<ShowTime> showtimes;
     
     
     public Movie() {
@@ -40,15 +38,15 @@ public class Movie implements Serializable{
         this.genres = new ArrayList<Genre>();
         this.casts = new ArrayList<String>();
         this.movieFormat = new ArrayList<MovieFormat>();
-        this.reviews = new ArrayList<String>();
+        this.reviews = new ArrayList<Review>();
         this.averageReviewScore = 0;
         this.totalReviewNo = 0; 
         this.totalReviewScore = 0;
         
+        
     }
     
-    // getters
-
+    //Getters
     public int getMovieID() {
         return movieID;
     }
@@ -76,7 +74,7 @@ public class Movie implements Serializable{
     public int getDuration() {
         return duration;
     }
-    public List<String> getReviews() {
+    public List<Review> getReviews() {
         return reviews;
     }
     public int getTotalReviewNo() {
@@ -100,13 +98,12 @@ public class Movie implements Serializable{
     public double getProfit() {
         return profit;
     }
-    public List<String> getShowtimes() {
+    public List<ShowTime> getShowtimes() {
         return showtimes;
     }
     
     
-    // setters 
-
+    //Setters 
     public void setMovieID(int movieID) {
         this.movieID = movieID;
     }
@@ -134,7 +131,7 @@ public class Movie implements Serializable{
     public void setDuration(int duration) {
         this.duration = duration;
     }
-    public void setReviews(List<String> reviews) {
+    public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
     }
     public void setTotalReviewNo(int totalReviewNo) {
@@ -158,10 +155,12 @@ public class Movie implements Serializable{
     public void setProfit(double profit) {
         this.profit = profit;
     }
-    public void setShowtimes(List<String> showtimes) {
+    public void setShowtimes(List<ShowTime> showtimes) {
         this.showtimes = showtimes;
     }
    
+    
+    
     public void displayMovieDetails(){
         System.out.println("Movie Title: "+title);
         System.out.println("Genres: "+genres);
@@ -179,26 +178,5 @@ public class Movie implements Serializable{
         System.out.println("ReleaseDate: "+releaseDate);
         System.out.println();
         System.out.println();
-    }
-    
-    // adders
-
-    // adds a new review into review array list
-   
-    public void addMovieReview(String reviewID) 
-    {
-        this.reviews.add(reviewID);
-    }
-
-    // removes a review from review array list
-    
-    public void removeMovieReview(String reviewID) 
-    {
-    	int i;
-    	
-    	for (i=0;i<this.getReviews().size(); i++)
-    		if (this.getReviews().get(i).equals(reviewID)) {
-    			this.reviews.remove(i);
-    		}
     }
 }
