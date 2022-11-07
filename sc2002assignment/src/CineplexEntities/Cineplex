@@ -1,4 +1,4 @@
-package CineplexEntites
+package CineplexEntities;
 
 //Cineplex Class
 import java.util.List;
