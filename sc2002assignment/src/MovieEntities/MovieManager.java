@@ -69,7 +69,7 @@ public class MovieManager {
         
     }
     
-    
+     
     /**
      * 
      * Serialize and save movie object into dat file 
