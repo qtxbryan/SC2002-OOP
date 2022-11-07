@@ -11,7 +11,7 @@ import java.util.Scanner;
 import MovieEntities.MovieManager;
 import utilities.RootFinder;
 import utilities.Serializer;
-import utilities.IDHelper;
+import utilities.IDGenerator;
 
 // ReviewManager for adding, viewing or deleting reviews
  
@@ -131,7 +131,7 @@ public class ReviewManager {
         
             switch (choice) {
             case 1:
-            	String reviewID = IDHelper.getLatestID("review");
+            	String reviewID = IDGenerator.getCurrentID("review");
             	review.set_reviewID(reviewID);
             	this.save(review);
             	MovieManager.getInstance().updateReview(movieID, reviewID, review.get_score(), "add");
