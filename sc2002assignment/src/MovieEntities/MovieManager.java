@@ -722,16 +722,6 @@ public class MovieManager {
         
         
     }
-
-    // saves a movie object and serializes it
-    // movie: The movie object to be saved
-     
-    private void save(Movie movie) 
-    {
-        String filepath = RootFinder.findRootPath() + "/data/movies/movie_"+movie.getMovieID()+".dat";
-        Serializer.serializeObject(movie, filepath);
-        System.out.println("Movies Saved!");
-    }
     
     /**
      * Remove movie by changing status to END_OF_SHOWING
