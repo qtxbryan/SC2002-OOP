@@ -2,26 +2,11 @@ package customer;
 
 import java.util.Scanner;
 
-import MovieEntities.MovieManager;
-
 public class CustomerApp {
 
 	private Scanner sc = new Scanner(System.in);
 	
 	private CustomerApp() {}
-	
-	private static CustomerApp single_instance = null; 
-	
-	public static CustomerApp getInstance() {
-	    
-	    if(single_instance == null) {
-	        
-	        single_instance = new CustomerApp();
-	        
-	    }
-	    return single_instance;
-	    
-	}
 	
 	public void displayCustomerMenu() {
 		
