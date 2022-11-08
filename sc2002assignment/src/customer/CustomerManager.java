@@ -3,9 +3,12 @@ package customer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.io.File;
 
 import booking.Booking;
 import utilities.IDHelper;
+import utilities.RootFinder;
+import utilities.Serializer;
 
 /**
  * This is the CustomerManager. It will manage the customer side of things, the check their booking 
@@ -215,14 +218,14 @@ public class CustomerManager{
         Booking booking=null;
         
         //looks in bookings folder for past bookings
-        String folderPath = ProjectRootPathFinder.findProjectRootPath() + "/data/bookings";
+        String folderPath = RootFinder.findRootPath() + "/data/bookings";
         File[] files= getAllFiles(folderPath);
         if (files!=null) {
             for (int i=0; i<files.length;i++)
             {
                 String filePath= files[i].getPath();
                 if (filePath.contains(bookingID))
-                    booking= (Booking)SerializerHelper.deSerializeObject(filePath);
+                    booking= (Booking)Serializer.deserializeObject(filePath);
             }
             return booking;
             }
@@ -284,22 +287,22 @@ public class CustomerManager{
      * This is to save the current customer's file into its own data file
      */
     private void save() {
-        String filePath = ProjectRootPathFinder.findProjectRootPath();
+        String filePath = RootFinder.findRootPath();
         filePath = filePath + "/data/customers/customer_" + getCust().getCustomerID() + ".dat"; 
-        SerializerHelper.serializeObject(getCust(), filePath);
+        Serializer.serializeObject(getCust(), filePath);
     }
     
     /**
      * This is to load all Customer Data into the CustomerManager for us to do lookup
      */
     private void loadCustomers(){
-        String folderPath = ProjectRootPathFinder.findProjectRootPath() + "/data/customers";
+        String folderPath = RootFinder.findRootPath() + "/data/customers";
         File[] files= getAllFiles(folderPath);
         if (files!=null)
             for (int i=0; i<files.length;i++)
             {
                 String filePath = files[i].getPath();
-                CustomerAccount newCust = (CustomerAccount)(SerializerHelper.deSerializeObject(filePath));
+                CustomerAccount newCust = (CustomerAccount)(Serializer.deserializeObject(filePath));
                 
                 emailHash.put(newCust.getEmail(), newCust.getCustomerID());
                 mobileHash.put(newCust.getMobileNo(), newCust.getCustomerID());

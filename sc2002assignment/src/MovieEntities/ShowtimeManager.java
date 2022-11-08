@@ -3,6 +3,7 @@ package MovieEntities;
 import utilities.Serializer;
 import utilities.RootFinder;
 import utilities.IDHelper;
+import booking.BookingManager;
 import CineplexEntities.Cineplex;
 import CineplexEntities.Cinema;
 import CineplexEntities.CinemaStatus;
@@ -66,7 +67,7 @@ public class ShowtimeManager {
      *                different menus are shown to the user.
      */
     void getMovieShowtimes(String movieID, String appType) {
-        List<String> relevantShowtimeIDs = MovieManager.getInstance().getMoviebyID(movieID).getShowtimeIDs();
+        List<String> relevantShowtimeIDs = MovieManager.getInstance().getMovieByID(movieID).getShowtimeIDs();
         List<Showtime> relevantShowtimes = new ArrayList<Showtime>();
         for (String showtimeID : relevantShowtimeIDs) {
             Showtime showtime = this.showtimes.get(showtimeID);
@@ -156,7 +157,7 @@ public class ShowtimeManager {
                 }
             }
             else if (appType.equalsIgnoreCase("Customer")) {
-                Movie movie = MovieManager.getInstance().getMoviebyID(movieID);
+                Movie movie = MovieManager.getInstance().getMovieByID(movieID);
                 if (movie.getShowingStatus().equals(ShowingStatus.COMING_SOON)) {
                 	choice= 0;
                 }
@@ -211,7 +212,7 @@ public class ShowtimeManager {
         int choice;
 
         String movieID = this.showtimes.get(selectedShowtimeID).getMovieID();
-        Movie movie = MovieManager.getInstance().getMoviebyID(movieID);
+        Movie movie = MovieManager.getInstance().getMovieByID(movieID);
         if (movie.getShowingStatus().equals(ShowingStatus.COMING_SOON)) {}
         else {
             do {
@@ -453,7 +454,7 @@ public class ShowtimeManager {
         cinemaStatus = CinemaStatus.AVAILABLE;
 
         System.out.println("Available movie formats");
-        List<MovieFormat> movieFormats = MovieManager.getInstance().getMoviebyID(movieID).getMovieFormats();
+        List<MovieFormat> movieFormats = MovieManager.getInstance().getMovieByID(movieID).getMovieFormat();
         for(int i=0;i<movieFormats.size();i++){
             System.out.println(i+1 + ". "+movieFormats.get(i).toString());
         }
