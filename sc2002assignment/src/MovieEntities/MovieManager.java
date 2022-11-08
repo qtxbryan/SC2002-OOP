@@ -1155,7 +1155,7 @@ public class MovieManager {
      * 
      * Staff only: View top 5 movies by sales
      */
-    private void viewTop5Sales() {
+    public void viewTop5Sales() {
         
         
         ArrayList<Movie> top5 = new ArrayList<Movie>();
@@ -1190,11 +1190,11 @@ public class MovieManager {
      * 
      * Staff only: View top 5 movies 
      */
-    private void viewTop5Review() {
+    public void viewTop5Review() {
         
         ArrayList<Movie> top5 = new ArrayList<Movie>();
         
-        for(Map.Entry<String, Movie> entry: movies.entrySet()) {
+        for(Map.Entry<String, Movie> entry : movies.entrySet()) {
             
             if(entry.getValue().getStatus().equals("Preview") || entry.getValue().getStatus().equals("Now_Showing")) {
                 
@@ -1203,6 +1203,21 @@ public class MovieManager {
             }
         }
         
+        top5.sort(Comparator.comparingDouble(Movie::getAverageReviewScore).reversed());
+        
+        if(top5.size() == 0) {
+            
+            System.out.println("Movies not available");
+            return;
+            
+        }else {
+            for (int i = 0; i < Math.min(5, top5.size()); i++) {
+                
+                System.out.println(i + 1 + ". " + top5.get(i).getTitle() + " (Average Review Score: " + top5.get(i).getAverageReviewScore()+ ")");
+                
+            }
+            
+        }
         
     }
 

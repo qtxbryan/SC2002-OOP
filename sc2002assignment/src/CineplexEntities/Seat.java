@@ -1,41 +1,40 @@
 package CineplexEntities;
 
-//Seat Class
-
-enum SeatType {Couple, Regular;}
-
-public class Seat{
-    //attributes
+/**
+ * Entity class with typical attributes of a seat.
+ */
+public class Seat {
+    /**
+     * Boolean that specifies if a seat is occupied.
+     */
     private boolean occupied;
-    private int seatID;
-    private SeatType seatType;
+    /**
+     * ID that identifies a seat.
+     */
+    private String seatID;
 
-    //getters
-    public boolean get_occupied(){
+    /**
+     * To check for occupancy of the seat.
+     * @return whether the seat is occupied.
+     */
+    public boolean isOccupied() {
         return occupied;
     }
-    public int get_seatID(){
+
+    /**
+     * To set the occupancy of the seat.
+     * @param occupied set whether seat is occupied.
+     */
+    public void setOccupied(boolean occupied) {
+        this.occupied = occupied;
+    }
+
+
+    public String getSeatID() {
         return seatID;
     }
-    public SeatType get_seatType(){
-        return seatType;
-    }
 
-    //setters
-    public void set_occupied(boolean v){
-        occupied = v;
+    public void setSeatID(String seatID) {
+        this.seatID = seatID;
     }
-    public void set_seatID(int ID){
-        seatID = ID;
-    }
-    public void set_seatType(SeatType st){
-        seatType = st;
-    }
-
-    //constructors
-    Seat(int ID, SeatType st){
-        occupied = false;
-        seatID = ID;
-        seatType = st;
-    } 
 }
