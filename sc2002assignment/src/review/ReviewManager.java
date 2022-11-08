@@ -214,7 +214,7 @@ public class ReviewManager {
     
     public Map<String, Review> load() 
     {
-        HashMap<String, Review> loadedReviews = new HashMap<String, Review>();
+        HashMap<String, Review> loadReviews = new HashMap<String, Review>();
         File folder = new File(RootFinder.findRootPath() + "/data/reviews");
 
         File[] listOfFiles = folder.listFiles();
@@ -223,12 +223,12 @@ public class ReviewManager {
         {
           for(int i=0;i<listOfFiles.length;i++)
           {
-            String filepath = listOfFiles[i].getPath(); // returns full path incl file name and type
-            Review newReview = (Review) Serializer.deserializeObject(filepath);
+            String filePath = listOfFiles[i].getPath(); // returns full path incl file name and type
+            Review newReview = (Review) Serializer.deserializeObject(filePath);
             String fileID = listOfFiles[i].getName().split("\\.(?=[^\\.]+$)")[0].split("_")[1];
-                loadedReviews.put(fileID, newReview);
+                loadReviews.put(fileID, newReview);
             }
         }
-        return loadedReviews;
+        return loadReviews;
     }    
 }
