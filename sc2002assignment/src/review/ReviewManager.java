@@ -11,7 +11,7 @@ import java.util.Scanner;
 import MovieEntities.MovieManager;
 import utilities.RootFinder;
 import utilities.Serializer;
-import utilities.IDGenerator;
+import utilities.IDHelper;
 
 // ReviewManager for adding, viewing or deleting reviews
  
@@ -49,7 +49,7 @@ public class ReviewManager {
     }
     
 	// listMovieReview prints out all the reviews for a specific movie 
-    // reviewIDs: Array list of the reviewIDs of a movie, to indicates which reviews belong to the movie
+    // reviewIDs: array list of the reviewIDs of a movie, to indicate which reviews belong to the movie
     
     public void listMovieReview(List<String> reviewIDs) 
     {
@@ -78,7 +78,7 @@ public class ReviewManager {
     
     // addMovieReview allows the customer to add a new review for a specific movie
      
-    public void addMovieReview(int movieID) 
+    public void addMovieReview(String movieID) 
     {
     	Review review = new Review();
  	
@@ -131,7 +131,7 @@ public class ReviewManager {
         
             switch (choice) {
             case 1:
-            	String reviewID = IDGenerator.getCurrentID("review");
+            	String reviewID = IDHelper.getLatestID("review");
             	review.set_reviewID(reviewID);
             	this.save(review);
             	MovieManager.getInstance().updateReview(movieID, reviewID, review.get_score(), "add");
@@ -153,7 +153,7 @@ public class ReviewManager {
     }
     
     // deleteMovieReview is accessible only by a staff account. This is used by staff members to delete review bombs
-    // reviewIDs: Array list of the reviewIDs of a movie, to indicate which reviews belong to the movie
+    // reviewIDs: array list of the reviewIDs of a movie, to indicate which reviews belong to the movie
      
     public void deleteMovieReview(List<String> reviewIDs) 
     {
@@ -201,7 +201,7 @@ public class ReviewManager {
 	// private serialization and deserialization
 
 	// this is used to save a review that has just been added by the customer. It will create a new review data file in the "reviews" folder
-	// review: This is the current review that is being written and to be saved
+	// review: this is the current review that is being written and to be saved
 	 
     private void save(Review review) 
     {
@@ -209,8 +209,8 @@ public class ReviewManager {
 		Serializer.serializeObject(review, filePath);
 	}
     
-     // this returns all of the reviews that are currently in the "reviews" folder. 
-     // this returns a hashmap of all the available reviews in our data files 
+     // this returns all of the reviews that are currently in the "reviews" folder 
+     // this returns a hashmap of all the available reviews in the data files 
     
     public Map<String, Review> load() 
     {
