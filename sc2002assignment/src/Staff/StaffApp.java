@@ -100,9 +100,10 @@ public class StaffApp {
        
        do {
            System.out.println( "==================== MOBLIMA STAFF APP ====================\n" +
-                               " 1. View Top 5 Movies                                     \n" +
-                               " 2. Configure System Settings                             \n" +
-                               " 3. Movie Database                                        \n" +
+                               " 1. View Top 5 Movies (Sales)                             \n" +
+                               " 2. View Top 5 Movies (Reviews)                           \n" +
+                               " 3. Configure System Settings                             \n" +
+                               " 4. Movie Database                                        \n" +
                                " 0. Logout from StaffApp                                  \n"+
                                "===========================================================");
            System.out.println("Enter choice: ");
@@ -116,12 +117,15 @@ public class StaffApp {
            
            switch (choice) {
            case 1: 
-               MovieManager.getInstance();//need to add viewtop5 method
+               MovieManager.getInstance().viewTop5Sales();;//need to add viewtop5 method
                break;
-           case 2:
-               //SystemSettings.getInstance().displayMenu();
+           case 2: 
+               MovieManager.getInstance().viewTop5Review();;//need to add viewtop5 method
                break;
            case 3:
+               //SystemSettings.getInstance().displayMenu();
+               break;
+           case 4:
                MovieManager.getInstance().movieMenuStaff();
                break;
            case 0:
