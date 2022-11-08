@@ -1,7 +1,5 @@
 package booking; //change to ManagerEntities
 
-package CineplexEntities;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.lang.Math;
