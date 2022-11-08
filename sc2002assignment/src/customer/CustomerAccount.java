@@ -13,21 +13,22 @@ public class CustomerAccount {
 	private String email; 
 	private List<Booking> bookingHistory;
 	
-	
-	public CustomerAccount(int customerID) {
-		
-		this.customerID = customerID; 
-		
-	}
+
+	public CustomerAccount(String name, String email2, String mobileNo2) {
+        // TODO Auto-generated constructor stub
+	    customerName = name;
+	    email = email2;
+	    mobileNo = mobileNo2;
+    }
 
 
-	public int getCustomerID() {
+    public int getCustomerID() {
 		return customerID;
 	}
 
 
-	public void setCustomerID(int customerID) {
-		this.customerID = customerID;
+	public void setCustomerID(String string) {
+		this.customerID = string;
 	}
 
 
