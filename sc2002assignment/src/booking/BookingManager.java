@@ -1,7 +1,7 @@
 package booking;
 
-import movie_entities.Showtime;
-import company_entities.CinemaStatus;
+import MovieEntities.Showtime;
+import CineplexEntities.CinemaStatus;
 
 
 import utilities.*;
@@ -241,10 +241,10 @@ public class BookingManager implements ResetSelf {
     	System.out.println("Returning back to main screen...");
     	
     	// We can then send this booking off to store as a serialized file
-    	String filePath = ProjectRootPathFinder.findProjectRootPath();
+    	String filePath = RootFinder.findRootPath();
     	filePath = filePath + "/data/bookings/booking_" + getBooking().getBookingID() + ".dat";
     	
-    	SerializerHelper.serializeObject(getBooking(), filePath);
+    	Serializer.serializeObject(getBooking(), filePath);
     	   	
     	// Finally, reset this instance and all instances
     	TicketManager.getInstance().resetSelf();

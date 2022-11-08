@@ -797,6 +797,16 @@ public class MovieManager {
         
         
     }
+
+    /**
+     * Updates number of Tickets sold of a specific movie when a ticket for the movie is bought.
+     * @param movieID MovieID of the Movie.
+     * @param ticketsSold Number of tickets sold for the Movie.
+     */
+    void updateTicketsSold(String movieID, long ticketsSold){
+        movies.get(movieID).setTicketsSold(movies.get(movieID).getTicketsSold() + ticketsSold);
+    }
+
    
      // adds review to list of reviews that a movie has and updates the movie's total number of reviews
      // total review score and average review score
