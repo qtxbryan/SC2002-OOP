@@ -116,10 +116,10 @@ public class StaffApp {
            
            switch (choice) {
            case 1: 
-               MovieManager.getInstance()//need to add viewtop5 method
+               MovieManager.getInstance();//need to add viewtop5 method
                break;
            case 2:
-               SystemSettings.getInstance().displayMenu();
+               //SystemSettings.getInstance().displayMenu();
                break;
            case 3:
                MovieManager.getInstance().movieMenuStaff();
