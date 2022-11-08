@@ -1,5 +1,7 @@
 package staff;
 
+import java.time.LocalDate;
+
 enum MovieFormat{
     TwoD,
     ThreeD,
@@ -7,19 +9,58 @@ enum MovieFormat{
 };
 
 public class Showtime {
-    
+	
     private int showTimeID;
 
     private DateTime dateTime;
 
-    private int movieID;
+	/**
+	 * @param movieFormat the movieFormat to set
+	 */
+	public void setMovieFormat(MovieFormat movieFormat) {
+		this.movieFormat = movieFormat;
+	}
 
-    private MovieFormat movieFormat;
+	/**
+	 * @return the cinema
+	 */
+	public Cinema getCinema() {
+		return cinema;
+	}
 
-    private Cinema cinema;
+	/**
+	 * @param cinema the cinema to set
+	 */
+	public void setCinema(Cinema cinema) {
+		this.cinema = cinema;
+	}
 
-    private int cineplexID;
+	/**
+	 * @return the cineplexID
+	 */
+	public int getCineplexID() {
+		return cineplexID;
+	}
 
-    private CinemaStatus cinemaStatus;
+	/**
+	 * @param cineplexID the cineplexID to set
+	 */
+	public void setCineplexID(int cineplexID) {
+		this.cineplexID = cineplexID;
+	}
+
+	/**
+	 * @return the cinemaStatus
+	 */
+	public CinemaStatus getCinemaStatus() {
+		return cinemaStatus;
+	}
+
+	/**
+	 * @param cinemaStatus the cinemaStatus to set
+	 */
+	public void setCinemaStatus(CinemaStatus cinemaStatus) {
+		this.cinemaStatus = cinemaStatus;
+	}
 
 }
