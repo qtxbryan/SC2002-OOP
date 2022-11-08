@@ -1205,6 +1205,25 @@ public class MovieManager {
         
         
     }
+
+    /**
+     * Updates number of Tickets sold of a specific movie when a ticket for the movie is bought.
+     * @param movieID MovieID of the Movie.
+     * @param ticketsSold Number of tickets sold for the Movie.
+     */
+    void updateTicketsSold(String movieID, long ticketsSold){
+        movies.get(movieID).setTicketsSold(movies.get(movieID).getTicketsSold() + ticketsSold);
+    }
+
+        /**
+     * This method accesses the hashmap and finds a Movie object with the given movieID.
+     * @param movieID MovieID of a Movie object that is to be found.
+     * @return Returns the Movie object with the specific movieID from the hashmap.
+     */
+    public Movie getMoviebyID(String movieID){
+        return movies.get(movieID);
+    }
+    
    
      // adds review to list of reviews that a movie has and updates the movie's total number of reviews
      // total review score and average review score
