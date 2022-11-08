@@ -11,7 +11,7 @@ public class Review implements Serializable {
 	private String reviewerName; 
 	private String reviewTitle; 
 	private String reviewBody; 
-	private int movieID; // ID of movie being reviewed
+	private String movieID; // ID of movie being reviewed
 	private double score; 
 	private LocalDateTime dateTime; //date and time of review  
 	
@@ -33,7 +33,7 @@ public class Review implements Serializable {
         return reviewBody;
     }
 
-    public int getMovieID() {
+    public String getMovieID() {
     	return movieID;
     }
 
@@ -63,7 +63,7 @@ public class Review implements Serializable {
         this.reviewBody = reviewBody;
     }
 
-    public void set_movieID(int movieID) {
+    public void set_movieID(String movieID) {
     	this.movieID = movieID;
     }
 

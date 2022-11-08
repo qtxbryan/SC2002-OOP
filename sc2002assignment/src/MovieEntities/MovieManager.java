@@ -11,27 +11,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import review.ReviewManager;
+
 import utilities.IDHelper;
 import utilities.RootFinder;
 import utilities.Serializer;
 
 public class MovieManager {
 
-    /**
-     * 
-     * Map Integer movieID to movieObject
-     */
+    // maps movieID to movieObject
+    
     private Map <String, Movie> movies; 
     private Scanner sc = new Scanner(System.in);
 
     private static MovieManager single_instance = null; 
     
-    
-    /**
-     * Instantiates the MovieManager singleton. If no previous instance has been created,
-     * one is created. Otherwise, the previous instance created is used.
-     * @return an instance of MovieManager.
-     */
+    // instantiates the MovieManager singleton. If no previous instance was created, one is created. Else, the previous instance is used.
+    // returns an instance of MovieManager
+     
     
     public static MovieManager getInstance() {
         
@@ -56,10 +53,8 @@ public class MovieManager {
     
     
     
-    /**
-     * 
-     *  Loads Movie object from data files by iterating 
-     */
+    // loads Movie object from data files by iterating 
+     
     private void load() {
         
         File folder = new File(RootFinder.findRootPath() + "/data/movies");
@@ -84,11 +79,9 @@ public class MovieManager {
     }
     
      
-    /**
-     * 
-     * Serialize and save movie object into dat file 
-     * @param movie The Movie object to be saved in dat file 
-     */
+    // serialize and save Movie object into dat file 
+    // movie: the Movie object to be saved in dat file 
+     
     private void save(Movie movie) {
         
         String path = RootFinder.findRootPath() + "/data/movies/movie"+movie.getMovieID()+".dat";
@@ -98,12 +91,8 @@ public class MovieManager {
     
     }
     
-    /**
-     * 
-     * Display menu for user about movie details like movie showtime, view reviews, leave review
-     * @param movie
-     * @param appType
-     */
+    // display menu for user containing movie details such as showtimes and reviews
+    
     private void subMenu(Movie movie, String appType) {
         
         if(appType.equals("Staff")) {
@@ -114,11 +103,11 @@ public class MovieManager {
               
                 System.out.println( "====================== MOVIE CHOICES =====================\n" +
                         " 1. Display/Edit Showtimes                              \n" +
-                        " 2. Edit Movie                                           \n" +
-                        " 3. Remove Movie                                         \n" +
-                        " 4. View Reviews                                         \n" +
-                        " 5. Delete Reviews                                   \n" +
-                        " 0. Back to Movie Listings                           \n"+
+                        " 2. Edit Movie                                          \n" +
+                        " 3. Remove Movie                                        \n" +
+                        " 4. View Reviews                                        \n" +
+                        " 5. Delete Reviews                                      \n" +
+                        " 0. Back to Movie Listings                              \n" +
                         "==========================================================");
 
                 System.out.println("Enter choice: ");
@@ -147,9 +136,11 @@ public class MovieManager {
                         break; 
                         
                     case 4:
+                        ReviewManager.getInstance().listMovieReview(movie.getReviews());
                         break; 
                     
                     case 5:
+                        ReviewManager.getInstance().deleteMovieReview(movie.getReviews());
                         break; 
                         
                     case 0:
@@ -172,8 +163,8 @@ public class MovieManager {
                 System.out.println( "====================== MOVIE CHOICES =====================\n" +
                         " 1. Display Showtimes                                   \n" +
                         " 2. View Reviews                                        \n" +
-                        " 3. Leave Review                                        \n" +
-                        " 0. Back to Movie Listings                              \n"+
+                        " 3. Add Review                                          \n" +
+                        " 0. Back to Movie Listings                              \n" +
                         "==========================================================");
                 
                 System.out.println("Enter choice: ");
@@ -194,8 +185,10 @@ public class MovieManager {
                         break; 
                         
                     case 2:
+                        ReviewManager.getInstance().listMovieReview(movie.getReviews());
                         break; 
                     case 3:
+                        ReviewManager.getInstance().addMovieReview(movie.getMovieID());
                         break;
                         
                     case 0:
@@ -212,10 +205,8 @@ public class MovieManager {
     }
     
     
-    /**
-     * 
-     * Prints Staff main menu and allow many actions like view, edit, add and search movies 
-     */
+    // prints Staff main menu and allows many actions such as viewing, editing, adding and searching movies 
+     
     public void movieMenuStaff() {
         
         int choice; 
@@ -262,12 +253,8 @@ public class MovieManager {
     }
     
     
-    /**
-     * 
-     * Print out all movies in selected list and allow customer/staff to pick the movie they want
-     * @param selectedMovie
-     * @param appType
-     */
+    // prints out all movies in selected list and allows customer/staff to pick the movie they want
+     
     private void selectMovie(List<Movie> selectedMovie, String appType) {
         
         int choice, choice1; 
@@ -332,11 +319,8 @@ public class MovieManager {
     }
     
     
-    /**
-     * 
-     * Print out menu to see different types of movies 
-     * @param appType
-     */
+    // prints out menu to see different types of movies 
+   
     public void listMovies(String appType) {
         
         int choice; 
@@ -577,10 +561,8 @@ public class MovieManager {
         }
     }
     
-    /**
-     * 
-     *  Staff only: creates new Movie object 
-     */
+    // Staff only: creates new Movie object 
+     
     public void addMovies() {
         
         Movie movie = new Movie();
@@ -588,7 +570,7 @@ public class MovieManager {
         ArrayList<String> castList = new ArrayList<>();
         ArrayList<MovieFormat> movieFormatList = new ArrayList<>();
         
-        // Input movie title 
+        // input movie title 
         System.out.println("Enter movie title: ");
         sc.nextLine();
         
@@ -596,10 +578,10 @@ public class MovieManager {
         movie.setTitle(title);
         
         
-        // Input Genre 
+        // input genre 
         System.out.println("List of Genres: ");
         
-        //list out all the genres
+        // list out all the genres
         for(int i = 0; i < Genre.values().length; i++){
             
             System.out.println(i + 1 + ". " + Genre.values()[i].toString());
@@ -633,12 +615,12 @@ public class MovieManager {
             genreList.add(Genre.values()[choice]);
         }
         
-        // Input Director 
+        // input Director 
         System.out.println("Enter Director name: ");
         sc.nextLine();
         movie.setDirector(sc.nextLine());
         
-        // Input casts 
+        // input casts 
         System.out.println("Enter number of casts members: ");
         
         while(!sc.hasNextInt()) {
@@ -660,11 +642,11 @@ public class MovieManager {
         
         movie.setCasts(castList);
         
-        // Input Synopsis
+        // input synopsis
         System.out.println("Enter synopsis");
         movie.setSynopsis(sc.nextLine());
         
-        // Input movie rating
+        // input movie rating
         System.out.println("Pick Movie Rating: ");
         
         for(int i = 0; i < MovieRating.values().length; i++) {
@@ -684,7 +666,7 @@ public class MovieManager {
         movie.setMovieRating(MovieRating.values()[movieRating]);
         
         
-        // Input Movie Format
+        // input Movie Format
         
         System.out.println("List of movie formats: ");
         for(int i = 0; i < MovieFormat.values().length; i++) {
@@ -720,7 +702,7 @@ public class MovieManager {
         
         movie.setMovieFormat(movieFormatList);
         
-        // Input Movie Duration 
+        // input Movie Duration 
         System.out.println("Enter Movie Duration");
         
         while(!sc.hasNextInt()) {
@@ -732,7 +714,7 @@ public class MovieManager {
         
         movie.setDuration(sc.nextInt());
         
-        // Input showing status 
+        // input showing status 
         
         System.out.println("Pick showing status: ");
         for(int i = 0; i < ShowingStatus.values().length; i++) {
@@ -752,7 +734,7 @@ public class MovieManager {
         
         movie.setStatus(ShowingStatus.values()[showingStatus]);
         
-        // Input Release date 
+        // input release date 
         System.out.println("Enter release date: ");
         String releaseDate = sc.next();
         
@@ -866,11 +848,8 @@ public class MovieManager {
         
     }
     
-    /**
-     * 
-     * Print menu for editing movie details for Staff and the save it in dat file  
-     * @param movie 
-     */
+    // print menu for editing movie details for Staff and then save it in dat file  
+     
     private void editMovie(Movie movie) {
         
         int choice; 
@@ -1108,11 +1087,8 @@ public class MovieManager {
     }
     
     
-    /**
-     * 
-     * Search for movies 
-     * @param appType
-     */
+    // search for movies 
+     
     private void searchMovie(String appType) {
         
         System.out.println("Enter a movie to search: ");
@@ -1141,96 +1117,187 @@ public class MovieManager {
         selectMovie(moviesFound, appType);
     }
     
-    /**
-     * Remove movie by changing status to END_OF_SHOWING
-     * @param movie
-     */
+    // remove movie by changing status to END_OF_SHOWING
+    
     private void removeMovie(Movie movie) {
         
         movie.setStatus(ShowingStatus.End_Of_Showing);
         this.save(movie);
     }
     
-    /**
-     * 
-     * Staff only: View top 5 movies by sales
-     */
-    private void viewTop5Sales() {
-        
-        
-        ArrayList<Movie> top5 = new ArrayList<Movie>();
-        
-        for(Map.Entry<String, Movie> entry : movies.entrySet()) {
-            
-            if(entry.getValue().getStatus().equals("Preview") || entry.getValue().getStatus().equals("Now_Showing")) {
-                
-                top5.add(entry.getValue());
-                
-            }
-        }
-        
-        top5.sort(Comparator.comparingDouble(Movie::getProfit).reversed());
-        
-        if(top5.size() == 0) {
-            
-            System.out.println("Movies not available");
-            return;
-            
-        }else {
-            for (int i = 0; i < Math.min(5, top5.size()); i++) {
-                
-                System.out.println(i + 1 + ". " + top5.get(i).getTitle() + " (Sales: " + top5.get(i).getProfit()+ ")");
-                
-            }
-            
-        }
-    }
+    // prints out a display menu to allow for viewing of top 5 movies using 3 different criteria
+    // 1. sales 2. no. of tickets sold 3. average review score
+    // movies with only 1 review will not be included in the sorted movies
     
-    /**
-     * 
-     * Staff only: View top 5 movies 
-     */
-    private void viewTop5Review() {
-        
-        ArrayList<Movie> top5 = new ArrayList<Movie>();
-        
-        for(Map.Entry<String, Movie> entry: movies.entrySet()) {
-            
-            if(entry.getValue().getStatus().equals("Preview") || entry.getValue().getStatus().equals("Now_Showing")) {
-                
-                top5.add(entry.getValue());
-                
+    public void viewTop5(String appType) {
+    	int choice;
+    	int subchoice;
+    	
+    	do {
+    		if (appType.equals("Customer")) {
+                System.out.println(	"==================== View Top 5 Movies =====================\n" +
+                                    " 1. By Sales                                              \n" +
+                                    " 2. By Tickets Sold                                       \n" +
+                                    " 3. By Reviews                                            \n" +
+                                    " 0. Back to CustomerApp                                   \n"+
+                                    "============================================================");
+    		} else if (appType.equals("Staff")) {
+                System.out.println(	"==================== View Top 5 Movies =====================\n" +
+                                    " 1. By Sales                                              \n" +
+                                    " 2. By Tickets Sold                                       \n" +
+                                    " 3. By Reviews                                            \n" +
+                                    " 0. Back to StaffApp                                      \n"+
+                                    "============================================================");
+    		}
+    		
+			System.out.println("Enter choice:");
+			
+			while (!sc.hasNextInt()) {
+            	System.out.println("Invalid input type. Please enter an integer value.");
+        		sc.next(); // remove newline character
             }
-        }
-        
-        
+			
+			choice= sc.nextInt();
+    		
+			ArrayList<Movie> top5 = new ArrayList<Movie>();
+    		
+			switch (choice) {
+				case 1:
+	                for(Map.Entry<String,Movie> entry : movies.entrySet()){
+	                    if(entry.getValue().getShowingStatus().equalsString("PREVIEW")||
+	                            entry.getValue().getShowingStatus().equalsString("NOW_SHOWING")){
+	                        top5.add(entry.getValue());
+	                    }
+	                }
+	                top5.sort(Comparator.comparingDouble(Movie::getProfit).reversed());
+			
+                    if(top5.size()==0){
+                        System.out.println("No Available Movies.");
+                        break;
+                    } else {
+                       for (int i=0;i<Math.min(5, top5.size());i++) {
+                           System.out.println(i+1 +". "+top5.get(i).getTitle() +" (Sales:  "+ top5.get(i).getProfit()+")");
+                       }
+                    }
+                    
+                    break;
+				case 2:
+                    for(Map.Entry<String,Movie> entry : movies.entrySet()){
+                        if(entry.getValue().getShowingStatus().equalsString("PREVIEW")||
+                                entry.getValue().getShowingStatus().equalsString("NOW_SHOWING")){
+                            top5.add(entry.getValue());
+                        }
+                    }
+                    top5.sort(Comparator.comparingLong(Movie::getTicketsSold).reversed());
+					
+                    if(top5.size()==0){
+                        System.out.println("No Available Movies.");
+                        break;
+                    } else {
+                       for (int i=0;i<Math.min(5, top5.size());i++) {
+                           System.out.println(i+1 +". "+top5.get(i).getTitle() +" (Tickets Sold:  "+ top5.get(i).getTicketsSold()+")");
+                       }
+                    }					
+                    
+					break;
+				case 3:
+                    for(Map.Entry<String,Movie> entry : movies.entrySet()){
+                        if(entry.getValue().getShowingStatus().equalsString("PREVIEW")||
+                                entry.getValue().getShowingStatus().equalsString("NOW_SHOWING")){
+                            top5.add(entry.getValue());
+                        }
+                    }
+                    for(int i=top5.size()-1;i>=0;i--){
+                        if(top5.get(i).getReviews().size() <= 1){
+                        	top5.remove(i);
+                        }
+                    }
+                    top5.sort(Comparator.comparingDouble(Movie::getAverageReviewScore).reversed());
+                    
+                    if(top5.size()==0){
+                        System.out.println("No Available Movies.");
+                        break;
+                    } else {
+                       for (int i=0;i<Math.min(5, top5.size());i++) {
+                           System.out.println(i+1 +". "+top5.get(i).getTitle() +" (Review Score:  "+ top5.get(i).getAverageReviewScore()+")");
+                       }
+                    }
+					
+					break;
+				case 0:
+					if (appType.equals("Customer")) {
+						System.out.println("Back to CustomerApp......");
+					} else if (appType.equals("Staff")) {
+						System.out.println("Back to StaffApp......");
+					}
+
+					break;
+				default:
+					System.out.println("Invalid input. Please enter a number between 0-3");
+					break;
+			}
+			
+			if ( (choice >=1 && choice <= 3) && appType.equals("Customer") ) {
+	            do {
+	                System.out.println("Choose a movie (Press 0 to exit): ");
+	                
+	                while (!sc.hasNextInt()) {
+	                	System.out.println("Invalid input type. Please enter an integer value.");
+	            		sc.next(); // remove newline character
+	                }
+	                
+	                subchoice = sc.nextInt()-1;        
+	                
+	                if (subchoice == -1) {
+	             	   System.out.println("Back to Top 5......");
+	                    break;
+	                } else if (subchoice >= top5.size()) {
+	             	   System.out.println("Invalid input. Please enter a number between 0 and " + top5.size());
+	                } else {
+	                	top5.get(subchoice).displayMovieDetails();
+	                	subMenu(top5.get(subchoice),appType);
+	                    subchoice = -1;
+	                }
+	            } while (subchoice != -1);
+			}
+			
+			
+			
+    	} while (choice != 0);
+    }
+
+    // updates profit of a movie when a ticket is sold
+    // profit: gross profit of the movie
+    
+    void updateGrossProfit(String movieID, double grossProfit){
+        movies.get(movieID).setProfit(movies.get(movieID).getProfit() + grossProfit);
     }
    
      // adds review to list of reviews that a movie has and updates the movie's total number of reviews
      // total review score and average review score
-     // reviewScore: Score of the review to be added
-     // function: Specifies whether to add or remove a review from the review list
+     // reviewScore: score of the review to be added
+     // function: specifies whether to add or remove a review from the review list
      
-//    public void updateReview(int movieID, String reviewID, double reviewScore, String function)
-//    {
-//        if (function.equals("add")) 
-//        {
-//        	Movie movie = movies.get(movieID);
-//            movie.setTotalReviewNo(movie.getTotalReviewNo()+1);
-//            movie.setTotalReviewScore(movie.getTotalReviewScore()+reviewScore);
-//            movie.addMovieReview(reviewID);
-//            movie.setAverageReviewScore(movie.getTotalReviewScore()/movie.getTotalReviewNo());
-//            this.save(movie);
-//        } 
-//        
-//        else if (function.equals("remove")) 
-//        {
-//        	Movie movie = movies.get(movieID);
-//            movie.setTotalReviewNo(movie.getTotalReviewNo()-1);
-//            movie.setTotalReviewScore(movie.getTotalReviewScore()-reviewScore);
-//            movie.removeMovieReview(reviewID);
-//            movie.setAverageReviewScore(movie.getTotalReviewScore()/movie.getTotalReviewNo());
-//            this.save(movie);
-//        }
-//    }
+    public void updateReview(String movieID, String reviewID, double reviewScore, String function)
+    {
+        if (function.equals("add")) 
+        {
+        	Movie movie = movies.get(movieID);
+            movie.setTotalReviewNo(movie.getTotalReviewNo()+1);
+            movie.setTotalReviewScore(movie.getTotalReviewScore()+reviewScore);
+            movie.addMovieReview(reviewID);
+            movie.setAverageReviewScore(movie.getTotalReviewScore()/movie.getTotalReviewNo());
+            this.save(movie);
+        } 
+        
+        else if (function.equals("remove")) 
+        {
+        	Movie movie = movies.get(movieID);
+            movie.setTotalReviewNo(movie.getTotalReviewNo()-1);
+            movie.setTotalReviewScore(movie.getTotalReviewScore()-reviewScore);
+            movie.removeMovieReview(reviewID);
+            movie.setAverageReviewScore(movie.getTotalReviewScore()/movie.getTotalReviewNo());
+            this.save(movie);
+        }
+    }
 }
