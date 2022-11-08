@@ -233,8 +233,8 @@ public class TransactionManager implements ResetSelf {
 		MovieManager.getInstance().updateGrossProfit(currMovieID, getTransaction().getTotalPrice());
 		
 		// Serialize transaction
-		String savePath = ProjectRootPathFinder.findProjectRootPath() + "/data/transactions/transaction_" + getTransaction().getTransactionID() + ".dat"; 
-		SerializerHelper.serializeObject(getTransaction(), savePath);
+		String savePath = RootFinder.findRootPath() + "/data/transactions/transaction_" + getTransaction().getTransactionID() + ".dat"; 
+		Serializer.serializeObject(getTransaction(), savePath);
 	}
 	
 	
