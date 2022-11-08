@@ -33,8 +33,4 @@ public enum CinemaStatus {
     public String toString() {
         return this.name;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 6fa904fa086784b4017bfac7966e117280408a44
