@@ -1,31 +1,34 @@
 package booking;
+import java.io.Serializable;
 
-import CineplexEntities.seat;
+/**
+ * Ticket purchased by customer.
+ */
+public class Ticket implements Serializable {
+    private TicketType ticketType;
+    private Double ticketPrice;
+    private String seatID;
 
+    /**
+     * Assigns type of ticket to ticket.
+     * @param ticketType Type of ticket. (e.g STANDARD,SENIOR)
+     */
+    // Constructor
+    public Ticket(TicketType ticketType) {
+    	this.ticketType = ticketType;
+    }
+    
+    
+    // Getters
+    
+    public TicketType getTicketType() {return ticketType;}
+    public void setTicketType(TicketType ticketType) {this.ticketType = ticketType;}
+    public Double getTicketPrice() {return ticketPrice;}
 
-public class Ticket {
-	private int ticketID;
-	private TicketType ticketType;
-	private Seat seat;
-	private double ticketPrice;
-
-
-	//Constructor
-	public Ticket (TicketType ticketType){
-		this.ticketType = ticketType;
-	}
-
-
-
-	//getters
-	public int getTicketID() {return ticketID;}
-	public TicketType getTicketType() {return ticketType;}
-	public Seat getSeat() {return seat;}
-	public double getTicketPrice() {return ticketPrice;}
-
-	//setters
-	public void setTicketID(int ticketID) {this.ticketID = ticketID;}
-	public void setTicketType(TicketType ticketType) {this.ticketType = ticketType;}
-	public void setSeat(Seat seat) {this.seat = seat;}
-	public void setTicketPrice(double ticketPrice) {this.ticketPrice = ticketPrice;}
+    
+    // Setters
+    
+    public void setTicketPrice(Double ticketPrice) {this.ticketPrice = ticketPrice;}
+    public String getSeatID() {return seatID;}
+    public void setSeatID(String seatID) {this.seatID = seatID;}
 }
