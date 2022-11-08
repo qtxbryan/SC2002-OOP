@@ -2,8 +2,6 @@ package customer;
 
 import java.util.Scanner;
 
-import MovieEntities.MovieManager;
-
 public class CustomerApp {
 
 	private Scanner sc = new Scanner(System.in);

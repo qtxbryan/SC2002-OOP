@@ -13,7 +13,7 @@ enum ShowingStatus {Coming_Soon, Preview, Now_Showing, End_Of_Showing;}
 
 public class Movie implements Serializable{
     //attributes
-    private int movieID;
+    private String movieID;
     private String title;
     public List<Genre> genres;
     private String director;
@@ -30,7 +30,7 @@ public class Movie implements Serializable{
     private LocalDate releaseDate;
     private int ticketsSold;
     private double profit;
-    public List<ShowTime> showtimes;
+//    public List<ShowTime> showtimes;
     
     
     public Movie() {
@@ -47,7 +47,7 @@ public class Movie implements Serializable{
     }
     
     //Getters
-    public int getMovieID() {
+    public String getMovieID() {
         return movieID;
     }
     public String getTitle() {
@@ -104,7 +104,7 @@ public class Movie implements Serializable{
     
     
     //Setters 
-    public void setMovieID(int movieID) {
+    public void setMovieID(String movieID) {
         this.movieID = movieID;
     }
     public void setTitle(String title) {
@@ -155,9 +155,9 @@ public class Movie implements Serializable{
     public void setProfit(double profit) {
         this.profit = profit;
     }
-    public void setShowtimes(List<ShowTime> showtimes) {
-        this.showtimes = showtimes;
-    }
+//    public void setShowtimes(List<ShowTime> showtimes) {
+//        this.showtimes = showtimes;
+//    }
    
     
     

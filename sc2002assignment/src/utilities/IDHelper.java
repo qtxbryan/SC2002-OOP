@@ -13,7 +13,7 @@ import java.io.IOException;
 public class IDHelper {
 	public static String getLatestID(String fileName) {
 	    	
-		String latestID = String.format("%08d", 00000000);
+		String id = String.format("%08d", 00000000);
 		
 		try {
 			// get filepath
@@ -21,36 +21,36 @@ public class IDHelper {
 			
 			if (filePath == null) {
 				throw new IOException("Cannot find root of project.");
+				
 			} else {
-				filePath = filePath + "/data/ids/" + fileName + "_id.txt";
+				filePath = filePath + "/data/id/" + fileName + "ID.txt";
 			}
-			
-			// open file and traverse it						
-			FileReader frStream = new FileReader( filePath );
-			BufferedReader brStream = new BufferedReader( frStream );
-			String inputLine;
+									
+			FileReader frs = new FileReader( filePath );
+			BufferedReader brs = new BufferedReader( frs );
+			String input;
 	
-			inputLine = brStream.readLine(); // read in a line
-			if (inputLine == null) {
-				latestID = String.format("%08d", 00000000);
+			input = brs.readLine(); // read in a line
+			if (input == null) {
+			    id = String.format("%08d", 00000000);
 			}
 			else {
-				latestID = inputLine;
+			    id = input;
 			}
 			
-			brStream.close(); // close file
+			brs.close(); // close file
 			
 			// open file in write mode
-			FileWriter fwStream = new FileWriter(filePath, false); // overwrite file
-		    BufferedWriter bwStream = new BufferedWriter(fwStream);
+			FileWriter fws = new FileWriter(filePath, false); // overwrite file
+		    BufferedWriter bws = new BufferedWriter(fws);
 		    
-		    String newLatestID = String.format("%08d", Integer.valueOf(latestID) + 1);
+		    String newLatestID = String.format("%08d", Integer.valueOf(id) + 1);
 		    
-		    bwStream.write(newLatestID);
+		    bws.write(newLatestID);
 			
-		    bwStream.close(); // close file
+		    bws.close(); // close file
 		    
-		    return latestID;
+		    return id;
 			
 		} catch ( FileNotFoundException e ) {
 			System.out.println( "File not found! " + e.getMessage() );
@@ -61,7 +61,7 @@ public class IDHelper {
 			System.exit( 0 );
 		}
 		
-		return latestID;           
+		return id;           
 	}
 
 }
