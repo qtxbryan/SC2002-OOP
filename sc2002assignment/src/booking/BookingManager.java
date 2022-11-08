@@ -3,6 +3,15 @@ package booking;
 import java.util.List;
 import java.util.ArrayList;
 import java.lang.Math;
+import MovieEntities.Showtime;
+import MovieEntities.ShowtimeManager;
+import CineplexEntities.CinemaStatus;
+import customer.CustomerManager;
+import utilities.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * This is the booking manager. It will interface with all booking related issues
