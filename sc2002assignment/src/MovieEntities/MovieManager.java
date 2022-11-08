@@ -807,6 +807,15 @@ public class MovieManager {
         movies.get(movieID).setTicketsSold(movies.get(movieID).getTicketsSold() + ticketsSold);
     }
 
+        /**
+     * This method accesses the hashmap and finds a Movie object with the given movieID.
+     * @param movieID MovieID of a Movie object that is to be found.
+     * @return Returns the Movie object with the specific movieID from the hashmap.
+     */
+    public Movie getMoviebyID(String movieID){
+        return movies.get(movieID);
+    }
+    
    
      // adds review to list of reviews that a movie has and updates the movie's total number of reviews
      // total review score and average review score
