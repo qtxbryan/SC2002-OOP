@@ -2,16 +2,14 @@ package customer;
 
 import java.util.List;
 
-import booking.Booking;
-
 public class CustomerAccount {
 	
 	
-	private int customerID; 
+	private String customerID; 
 	private String customerName;
-	private int mobileNo; 
+	private String mobileNo; 
 	private String email; 
-	private List<Booking> bookingHistory;
+	private List<String> bookingHistory;
 	
 
 	public CustomerAccount(String name, String email2, String mobileNo2) {
@@ -22,7 +20,7 @@ public class CustomerAccount {
     }
 
 
-    public int getCustomerID() {
+    public String getCustomerID() {
 		return customerID;
 	}
 
@@ -42,12 +40,12 @@ public class CustomerAccount {
 	}
 
 
-	public int getMobileNo() {
+	public String getMobileNo() {
 		return mobileNo;
 	}
 
 
-	public void setMobileNo(int mobileNo) {
+	public void setMobileNo(String mobileNo) {
 		this.mobileNo = mobileNo;
 	}
 
@@ -62,18 +60,20 @@ public class CustomerAccount {
 	}
 
 
-	public List<Booking> getBookingHistory() {
+	public List<String> getBookingHistory() {
 		return bookingHistory;
 	}
 
 
-	public void setBookingHistory(List<Booking> bookingHistory) {
+	public void setBookingHistory(List<String> bookingHistory) {
 		this.bookingHistory = bookingHistory;
 	}
 	
 	
 
-	
+	public void addBookingID(String bookingID) {
+    	bookingHistory.add(bookingID);
+    }
 	
 
 }

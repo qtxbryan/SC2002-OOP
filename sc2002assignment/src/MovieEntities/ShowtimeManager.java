@@ -5,6 +5,7 @@ import utilities.RootFinder;
 import utilities.IDHelper;
 import booking.BookingManager;
 import CineplexEntities.Cineplex;
+import CineplexEntities.CompanyManager;
 import CineplexEntities.Cinema;
 import CineplexEntities.CinemaStatus;
 import java.io.*;
@@ -67,7 +68,7 @@ public class ShowtimeManager {
      *                different menus are shown to the user.
      */
     void getMovieShowtimes(String movieID, String appType) {
-        List<String> relevantShowtimeIDs = MovieManager.getInstance().getMovieByID(movieID).getShowtimeIDs();
+        List<String> relevantShowtimeIDs = MovieManager.getInstance().getMovieByID(movieID).getShowtimes();
         List<Showtime> relevantShowtimes = new ArrayList<Showtime>();
         for (String showtimeID : relevantShowtimeIDs) {
             Showtime showtime = this.showtimes.get(showtimeID);
@@ -158,7 +159,7 @@ public class ShowtimeManager {
             }
             else if (appType.equalsIgnoreCase("Customer")) {
                 Movie movie = MovieManager.getInstance().getMovieByID(movieID);
-                if (movie.getShowingStatus().equals(ShowingStatus.COMING_SOON)) {
+                if (movie.getStatus().equals(ShowingStatus.Coming_Soon)) {
                 	choice= 0;
                 }
                 else {
@@ -213,7 +214,7 @@ public class ShowtimeManager {
 
         String movieID = this.showtimes.get(selectedShowtimeID).getMovieID();
         Movie movie = MovieManager.getInstance().getMovieByID(movieID);
-        if (movie.getShowingStatus().equals(ShowingStatus.COMING_SOON)) {}
+        if (movie.getStatus().equals(ShowingStatus.Coming_Soon)) {}
         else {
             do {
                 System.out.println("================== SHOWTIME CUSTOMER APP ===================\n" +

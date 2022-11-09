@@ -2,6 +2,7 @@ package booking;
 
 import MovieEntities.MovieManager;
 import MovieEntities.Showtime;
+import Staff.SystemSettingsManager;
 import utilities.ResetSelf;
 
 import java.util.ArrayList;

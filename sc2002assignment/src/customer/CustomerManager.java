@@ -199,9 +199,9 @@ public class CustomerManager{
         else {
             System.out.println("Previous Bookings:");
             //get list of booking IDs of customer and searches for each associated booking file
-            for (int i=0;i<custToPrint.getBookingHistoryID().size();i++) {
+            for (int i=0;i<custToPrint.getBookingHistory().size();i++) {
                 //search directory for booking file according to each ID
-                booking= loadBooking(custToPrint.getBookingHistoryID().get(i));
+                booking= loadBooking(custToPrint.getBookingHistory().get(i));
                 
                 if (booking!=null)
                     booking.displayBooking();
