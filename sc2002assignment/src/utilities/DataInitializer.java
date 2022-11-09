@@ -55,7 +55,7 @@ public class DataInitializer {
                 
                 //MovieID
                 input = brs.readLine();
-                newMovie.setMovieID(Integer.parseInt(input));
+                newMovie.setMovieID(input);
                 
             }catch (FileNotFoundException e) {
                 
@@ -70,6 +70,7 @@ public class DataInitializer {
                 
             }
         }
+        return movies;
     }
 
 }

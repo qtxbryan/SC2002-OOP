@@ -8,9 +8,7 @@ import MovieEntities.ShowtimeManager;
 import CineplexEntities.CinemaStatus;
 import customer.CustomerManager;
 import utilities.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 
 /**

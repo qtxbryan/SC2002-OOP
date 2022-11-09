@@ -4,10 +4,14 @@ import utilities.ResetSelf;
 import utilities.RootFinder;
 import utilities.Serializer;
 import java.util.Scanner;
+
+import MovieEntities.MovieManager;
+
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 import customer.CustomerManager;
+import Staff.SystemSettingsManager;
 /**
  * This is the TransactionManager. It will handle transaction related information once the entire booking has been confirmed
  *
