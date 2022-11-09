@@ -1,7 +1,6 @@
 package MovieEntities;
 
 import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -1129,7 +1128,7 @@ public class MovieManager {
      * 
      * Staff only: View top 5 movies by sales
      */
-    private void viewTop5Sales() {
+    public void viewTop5Sales() {
         
         
         ArrayList<Movie> top5 = new ArrayList<Movie>();
@@ -1164,7 +1163,7 @@ public class MovieManager {
      * 
      * Staff only: View top 5 movies 
      */
-    private void viewTop5Review() {
+    public void viewTop5Review() {
         
         ArrayList<Movie> top5 = new ArrayList<Movie>();
         
@@ -1206,5 +1205,44 @@ public class MovieManager {
             movie.setAverageReviewScore(movie.getTotalReviewScore()/movie.getTotalReviewNo());
             this.save(movie);
         }
+    }
+
+    public Movie getMoviebyID(String ID){
+        
+        return movies.get(ID);
+    }
+
+    public void updateTicketsSold(String currMovieID, int size) {
+        
+        for(Map.Entry<String, Movie> entry: movies.entrySet()) {
+            
+            if(entry.getValue().getMovieID().equals(currMovieID)) {
+                
+                int ticketSold = entry.getValue().getTicketsSold();
+                ticketSold = ticketSold + size;
+                entry.getValue().setTicketsSold(ticketSold);
+                
+            }
+        }
+    }
+
+    public void updateGrossProfit(String currMovieID, double totalPrice) {
+        for(Map.Entry<String, Movie> entry: movies.entrySet()) {
+            
+            if(entry.getValue().getMovieID().equals(currMovieID)) {
+                
+                double profit = entry.getValue().getProfit();
+                profit = profit + totalPrice;
+                entry.getValue().setProfit(profit);
+                
+            }
+        }
+    }
+
+    void updateShowtimes(String movieID, String showtime) {
+        this.movies.get(movieID).addShowtime(showtime);
+
+        this.save(this.movies.get(movieID));
+
     }
 }

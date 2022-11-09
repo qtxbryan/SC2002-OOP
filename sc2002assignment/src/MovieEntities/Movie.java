@@ -6,8 +6,6 @@ import java.util.ArrayList;
 // movie class
 import java.util.List;
 
-import review.Review;
-
 enum MovieRating {G, PG, PG13, NC16, M18, R21;}
 enum ShowingStatus {Coming_Soon, Preview, Now_Showing, End_Of_Showing;}
 
@@ -30,7 +28,7 @@ public class Movie implements Serializable{
     private LocalDate releaseDate;
     private int ticketsSold;
     private double profit;
-//  public List<ShowTime> showtimes;
+    public List<String> showtimes;
     
     
     public Movie() {
@@ -96,7 +94,7 @@ public class Movie implements Serializable{
     public double getProfit() {
         return profit;
     }
-    public List<ShowTime> getShowtimes() {
+    public List<String> getShowtimes() {
         return showtimes;
     }
     
@@ -193,5 +191,9 @@ public class Movie implements Serializable{
     		if (this.getReviews().get(i).equals(reviewID)) {
     			this.reviews.remove(i);
     		}
+    }
+
+    public void addShowtime(String showtime) {
+    	this.showtimes.add(showtime);
     }
 }
