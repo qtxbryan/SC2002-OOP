@@ -11,8 +11,13 @@ enum MovieFormat{
 public class Showtime {
 	
     private int showTimeID;
+	private int movieID;
+	private MovieFormat movieFormat;
+	private Cinema cinema;
+	private int cineplexID;
+	private CinemaStatus cinemaStatus;
 
-    private DateTime dateTime;
+    //private DateTime dateTime;
 
 	/**
 	 * @param movieFormat the movieFormat to set

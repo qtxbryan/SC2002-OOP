@@ -4,6 +4,9 @@ package staff;
 // import helper class
 import utilities.RootFinder;
 
+// import file readers
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +15,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
-
+import java.time.format.DateTimeFormatter;
+import java.io.FileNotFoundException;
+import java.time.format.DateTimeFormatter;
+import java.io.IOException;
 
 
 public class SystemSettings implements Serializable {
@@ -20,7 +26,7 @@ public class SystemSettings implements Serializable {
     private double standardTicketPrice;
     private double seniorTicketPrice;
     private double studentTicketPrice;
-    private List<DateTime> holidays;
+    //private List<DateTime> holidays;
     
 
 
@@ -37,14 +43,140 @@ public class SystemSettings implements Serializable {
 	}	
 	
 
-    public void printSystemSettingsPortal() {
-
-    }
 
 
+
+   
+
+    // Getters for SystemInfoHash & SystemInfoList
+    public List<String> getsystemInfoList() {return this.systemInfoList;}
+    public Map<String, Map<Object, Object>> getSystemInfoHash() {return this.systemInfoHash;};
+    //
+
+
+    
     public void viewSetting(String infoType) {
 		System.out.println(this.getSystemInfoHash().get(infoType));
 	}
+
+    public void addSetting(String infoType, Object key, Object value) {
+		if (infoType.equals("holidayReference")) {
+			this.systemInfoHash.get(infoType).put((LocalDate) key, (String) value);
+		} else {
+			this.systemInfoHash.get(infoType).put((String) key, (double) value);
+			this.systemInfoHash.get("priceReference").put((String) key, (double) value); // also update master list
+		}
+		
+		System.out.println("Setting added");
+	}
+
+
+    public void updateSetting(String infoType, Object key, Object value) {
+		if (infoType.equals("holidayReference")) {
+			this.systemInfoHash.get(infoType).replace((LocalDate) key, (String) value);
+		} else {
+			this.systemInfoHash.get(infoType).replace((String) key, (double) value);
+			this.systemInfoHash.get("priceReference").replace((String) key, (double) value); // also update master list
+		}
+		
+		System.out.println("Setting updated");		
+	}
+
+
+    private void setSystemInfoItem(String attributeName) {
+        try {
+            // Get filepath
+            String filePath = RootFinder.findRootPath();
+            
+            if (filePath == null) {
+                throw new IOException("Cannot find root");
+            } 
+            
+            this.systemInfoHash.put(attributeName, new HashMap<Object, Object>());
+            
+            switch (attributeName) {
+                case "priceReference": 
+                    filePath = filePath + "/data/system_settings/price_reference.txt";
+                    break;
+                case "holidayReference":
+                    filePath = filePath + "/data/system_settings/holiday_list.txt";
+                    break;
+                case "dayOfWeek$":
+                    filePath = filePath + "/data/system_settings/day_of_week.txt";
+                    break;
+                case "default$":
+                    filePath = filePath + "/data/system_settings/default_price.txt";
+                    break;
+                case "holiday$":
+                    filePath = filePath + "/data/system_settings/holiday.txt";
+                    break;
+                case "movieFormat$":
+                    filePath = filePath + "/data/system_settings/movie_format.txt";
+                    break;				
+                case "ticketType$":
+                    filePath = filePath + "/data/system_settings/ticket_type.txt";
+                    break;			
+                case "cinemaType$":
+                    filePath = filePath + "/data/system_settings/cinema_type.txt";
+                    break;							
+            }
+            
+            
+            // Open file and traverse it
+            FileReader frStream = new FileReader( filePath );
+            BufferedReader brStream = new BufferedReader( frStream );
+            String inputLine;
+            
+            do {
+                inputLine = brStream.readLine(); // read in a line
+                if (inputLine == null) {break;} // end of file
+                String inputLineSeparated[] = inputLine.split("\\|"); // escape the | character
+    
+                switch (attributeName) {
+                    case "holidayReference":
+                        LocalDate date = LocalDate.parse(inputLineSeparated[0].trim(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                        String holidayName = inputLineSeparated[1].trim();
+                        this.systemInfoHash.get(attributeName).put(date, holidayName);
+                        break;
+                    default:
+                        String key = inputLineSeparated[0].trim();
+                        Double value = Double.parseDouble(inputLineSeparated[1].trim());
+                        this.systemInfoHash.get(attributeName).put(key, value);						
+                        break;
+                }
+                
+            } while (inputLine != null);
+            
+            brStream.close();	
+            
+
+        } catch ( FileNotFoundException e ) {
+            System.out.println( "Error opening the input file!" + e.getMessage() );
+            System.exit( 0 );
+        } catch ( IOException e ) {
+            System.out.println( "IO Error!" + e.getMessage() );
+            e.printStackTrace();
+            System.exit( 0 );
+        }	
+    }
+    
+
+
+    // Initializers: Below code used only for the very first run of the app
+    private void setsystemInfoList() {
+        this.systemInfoList = new ArrayList<String>(List.of("priceReference", "holidayReference", "dayOfWeek$", "default$", "holiday$", "movieFormat$", "ticketType$", "cinemaType$"));	
+    }
+
+    private void setSystemInfoHash() {
+        this.systemInfoHash = new HashMap<String, Map<Object, Object>>();
+        for (String attributeName : this.getsystemInfoList()) {
+            this.setSystemInfoItem(attributeName);
+        }
+        
+    }
+
+}
+
 
 
 
@@ -76,121 +208,20 @@ public class SystemSettings implements Serializable {
     // private int removeShowtime(List<Movie> MovieList){
     //     /* */
     // }
-    
 
 
-        private void setSystemInfoItem(String attributeName) {
-            try {
-                // Get filepath
-                String filePath = RootFinder.findRootPath();
-                
-                if (filePath == null) {
-                    throw new IOException("Cannot find root");
-                } 
-                
-                this.systemInfoHash.put(attributeName, new HashMap<Object, Object>());
-                
-                switch (attributeName) {
-                    case "priceReference": 
-                        filePath = filePath + "/data/system_settings/price_reference.txt";
-                        break;
-                    case "holidayReference":
-                        filePath = filePath + "/data/system_settings/holiday_list.txt";
-                        break;
-                    case "dayOfWeek$":
-                        filePath = filePath + "/data/system_settings/day_of_week.txt";
-                        break;
-                    case "default$":
-                        filePath = filePath + "/data/system_settings/default_price.txt";
-                        break;
-                    case "holiday$":
-                        filePath = filePath + "/data/system_settings/holiday.txt";
-                        break;
-                    case "movieFormat$":
-                        filePath = filePath + "/data/system_settings/movie_format.txt";
-                        break;				
-                    case "ticketType$":
-                        filePath = filePath + "/data/system_settings/ticket_type.txt";
-                        break;			
-                    case "cinemaType$":
-                        filePath = filePath + "/data/system_settings/cinema_type.txt";
-                        break;							
-                }
-                
-                
-                // Open file and traverse it
-                FileReader frStream = new FileReader( filePath );
-                BufferedReader brStream = new BufferedReader( frStream );
-                String inputLine;
-                
-                do {
-                    inputLine = brStream.readLine(); // read in a line
-                    if (inputLine == null) {break;} // end of file
-                    String inputLineSeparated[] = inputLine.split("\\|"); // escape the | character
-        
-                    switch (attributeName) {
-                        case "holidayReference":
-                            LocalDate date = LocalDate.parse(inputLineSeparated[0].trim(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                            String holidayName = inputLineSeparated[1].trim();
-                            this.systemInfoHash.get(attributeName).put(date, holidayName);
-                            break;
-                        default:
-                            String key = inputLineSeparated[0].trim();
-                            Double value = Double.parseDouble(inputLineSeparated[1].trim());
-                            this.systemInfoHash.get(attributeName).put(key, value);						
-                            break;
-                    }
-                    
-                } while (inputLine != null);
-                
-                brStream.close();	
-                
+    // catch(FileNotFoundException e){
+    //     System.out.println(" Error, the file was not found"+ e.getMessage());
+    //     e.printStackTrace();
+    //     System.exit(0);
+    // }
 
-            } catch ( FileNotFoundException e ) {
-                System.out.println( "Error opening the input file!" + e.getMessage() );
-                System.exit( 0 );
-            } catch ( IOException e ) {
-                System.out.println( "IO Error!" + e.getMessage() );
-                e.printStackTrace();
-                System.exit( 0 );
-            }	
-        }
-    }
+    // catch( IOException e){
+    //     System.out.println("IO Error" + e.getMessage() );
+    //     e.printStackTrace();
+    //     System.exit(0);
+    // }
 
 
-    // Initializers: Below code used only for the very first run of the app
-    private void setsystemInfoList() {
-        this.systemInfoList = new ArrayList<String>(List.of("priceReference", "holidayReference", "dayOfWeek$", "default$", "holiday$", "movieFormat$", "ticketType$", "cinemaType$"));	
-    }
-
-    private void setSystemInfoHash() {
-        this.systemInfoHash = new HashMap<String, Map<Object, Object>>();
-        for (String attributeName : this.getsystemInfoList()) {
-            this.setSystemInfoItem(attributeName);
-        }
-        
-    }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-// catch(FileNotFoundException e){
-//     System.out.println(" Error, the file was not found"+ e.getMessage());
-//     e.printStackTrace();
-//     System.exit(0);
-// }
-
-// catch( IOException e){
-//     System.out.println("IO Error" + e.getMessage() );
-//     e.printStackTrace();
-//     System.exit(0);
-// }
+    // public void printSystemSettingsPortal() {
+    // }
